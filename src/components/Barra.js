@@ -14,7 +14,7 @@ class Barra extends React.Component {
       <Nav.Link href="/ilustraciones">Ilustraciones</Nav.Link>
       <Nav.Link href="/galeria">Galería</Nav.Link>
     </Nav>
-    <Nav className="justify-content-end" activeKey="/home">
+    <Nav className="justify-content-end">
     <Nav.Item>
       <Nav.Link href="/login">No está autenticado</Nav.Link>
     </Nav.Item>
