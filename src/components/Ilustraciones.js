@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel'
-import './Ilustraciones.css'
+import './Carrusel.css'
 import Img from './Assets/artrosis1.png'
 import Img2 from './Assets/artrosis2.png'
 import Img3 from './Assets/artrosis3.png'
