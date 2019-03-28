@@ -12,20 +12,20 @@ class Galeria extends React.Component {
   render() {
     return (
       <Carousel
-      interval={null}
+        interval={null}
       >
-      <Carousel.Item>
-      <img className="image" src={Galeria1}/>
-      </Carousel.Item>
-      <Carousel.Item>
-      <img className="image" src={Galeria2}/>
-      </Carousel.Item>
-      <Carousel.Item>
-      <img className="image" src={Galeria3}/>
-      </Carousel.Item>
-      <Carousel.Item>
-      <img className="image" src={Galeria4}/>
-      </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Galeria1} />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Galeria2} />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Galeria3} />
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Galeria4} />
+        </Carousel.Item>
 
       </Carousel>
     );

@@ -2,5 +2,5 @@
     "port": 3004,
     "userLoginAttribute": "cn", 
     "searchBase": "dc=test", 
-    "searchFilter": "(&(objectclass=person)(cn={{username}}))"
+    "searchFilter": "(cn={{username}})"
   }

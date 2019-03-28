@@ -18,101 +18,101 @@ import Img13 from './Assets/torax1.jpg'
 class Ilustraciones extends React.Component {
   render() {
     return (
-        <Carousel
+      <Carousel
         interval={null}
         indicators={false}>
-          <Carousel.Item>
-            <img className="image" src={Img}/>
-            <Carousel.Caption>
+        <Carousel.Item>
+          <img className="image" src={Img} />
+          <Carousel.Caption>
             <h3> Artrosis Cadera estadio 1 </h3>
             <p>Aparición de artritis en la cadera</p>
           </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img className="image" src={Img2}/>
-            <Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Img2} />
+          <Carousel.Caption>
             <h3> Artrosis Cadera estadio 2 </h3>
             <p>Aparición de artritis en la cadera</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img className="image" src={Img3}/>
-            <Carousel.Caption>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Img3} />
+          <Carousel.Caption>
             <h3> Artrosis Cadera estadio 3 </h3>
             <p>Aparición de artritis en la cadera</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img className="image" src={Img4}/>
-            <Carousel.Caption>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Img4} />
+          <Carousel.Caption>
             <h3> Artrosis Cadera estadio 4 </h3>
             <p>Aparición de artritis en la cadera</p>
           </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img className="image" src={Img5}/>
-            <Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Img5} />
+          <Carousel.Caption>
             <h3> Artrosis Rodilla </h3>
             <p>Aparición de artritis en la rodilla</p>
           </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img className="image" src={Img6}/>
-            <Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Img6} />
+          <Carousel.Caption>
             <h3> Artrosis Rodilla </h3>
             <p>Aparición de artritis en la rodilla</p>
           </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img className="image" src={Img7}/>
-            <Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Img7} />
+          <Carousel.Caption>
             <h3> Artrosis Rodilla Estadio 1 y 2 </h3>
             <p>Aparición de artritis en la rodilla</p>
           </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img className="image" src={Img8}/>
-            <Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Img8} />
+          <Carousel.Caption>
             <h3> Artrosis Rodilla Estadio 3 y 4</h3>
             <p>Aparición de artritis en la rodilla</p>
           </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img className="image" src={Img9}/>
-            <Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Img9} />
+          <Carousel.Caption>
             <h3> Artrosis Rodilla Prótesis</h3>
             <p>Aparición de artritis en la rodilla</p>
           </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img className="image" src={Img10}/>
-            <Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Img10} />
+          <Carousel.Caption>
             <h3> Columna Vertebral </h3>
             <p>Columna</p>
           </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img className="image" src={Img11}/>
-            <Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Img11} />
+          <Carousel.Caption>
             <h3> Columna Lumbar </h3>
             <p>Anatomía</p>
           </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img className="image" src={Img12}/>
-            <Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Img12} />
+          <Carousel.Caption>
             <h3> Vértebra Lumbar </h3>
             <p>Anatomía</p>
           </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img className="image" src={Img13}/>
-            <Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img className="image" src={Img13} />
+          <Carousel.Caption>
             <h3> Tórax </h3>
             <p>Anatomía</p>
           </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
+        </Carousel.Item>
+      </Carousel>
     );
   }
 }

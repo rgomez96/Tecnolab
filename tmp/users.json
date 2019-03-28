@@ -1,14 +1,14 @@
 [
-    {
-      "dn": "cn=gomezrafa85x,dc=test",
-      "cn": "gomezrafa85x",
-      "correo": "rgomezcanizares@gmail.com",
-      "categoria": "ingeniero"
-    },
-    {
-        "dn": "cn=gonzalezmanuel32y,dc=test",
-        "cn": "gonzalezmanuel32y",
-        "correo": "gonza@gmail.com",
-        "categoria": "medico"
-      }
-  ]
+  {
+    "dn": "cn=gomezrafa85x,dc=hospital,dc=ingeniero",
+    "password": "pass1",
+    "cn": "gomezrafa85x",
+    "correo": "rgomezcanizares@gmail.com"
+  },
+  {
+    "dn": "cn=gonzalezmanuel32y,dc=hospital,dc=medico",
+    "password": "pass1",
+    "cn": "gonzalezmanuel32y",
+    "correo": "gonza@gmail.com"
+  }
+]
