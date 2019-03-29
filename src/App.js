@@ -9,6 +9,7 @@ import Galeria from './components/Galeria'
 import Ilustraciones from './components/Ilustraciones'
 import Login from './components/Login'
 import ListaPendientes from './components/ListaPendientes'
+import Encurso from './components/Encurso'
 
 
 class App extends Component {
@@ -23,6 +24,7 @@ class App extends Component {
         <Route path="/login" component={Login} />
         <Route path="/nuevasol" component={NuevaSol} />
         <Route path="/listapendientes" component={ListaPendientes} />
+        <Route path="/encurso" component={Encurso} />
       </div>
       </BrowserRouter>
     );
