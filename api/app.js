@@ -3,6 +3,7 @@ var express      = require('express'),
     bodyParser   = require('body-parser'),
     LdapStrategy = require('passport-ldapauth');
     testAPIRouter = require("./routes/testAPI");
+    peticionesPendientes = require("./routes/pendiente")
  
 // Credentials from the free LDAP test server by forumsys
 // More info at: http://www.forumsys.com/tutorials/integration-how-to/ldap/online-ldap-test-server/
@@ -21,6 +22,7 @@ var app = express();
 passport.use(new LdapStrategy(OPTS));
  
 app.use("/testAPI", testAPIRouter);
+app.use("/pendiente", peticionesPendientes);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(passport.initialize());

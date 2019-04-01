@@ -1,15 +1,9 @@
-Form {
-    margin-right:auto;
-    text-align:auto;
-}
-
 
 .containerSolicitud {
-    width:50%;
+    width:80%;
     margin-top:2em;
-    margin-left:5em;
+    margin-left:auto;
     margin-right:auto;
-    float:left;
 }
 
 Form .form-control {
@@ -25,7 +19,7 @@ Form .form-label {
 
 .botones {
     width:20%;
-    float:right;
+    float:left;
     margin-top:3em;
     margin-right:10em;
 }
@@ -36,7 +30,7 @@ Form .form-label {
 
 Form .formizquierda{
     width: 35%;
-    float:right;
+    float:left;
     margin-right:14em;
     border:1px solid #ced4da;
     border-radius:0.25rem;

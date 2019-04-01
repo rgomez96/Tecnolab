@@ -4,27 +4,26 @@ import './Lista.css'
 import Button from 'react-bootstrap/Button'
 const JsonTable = require('ts-react-json-table');
 
+var _ = require('lodash');
+var filter = require('lodash.filter');
+
+
 class ListaPendientes extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      datatabla: [
-        {
-          "Número Solicitud": 24, Procedimiento: "Quimio", Especialidad: "dfa", Centro: "fds", Nusha: "fdaf",
-          nombre: "paciente", apellidos: "pacientoso", "Fecha Solicitud": "22/11/2019",
-          "Fecha Entrega Ideal": "28/11/2019", "Fecha Intervención": "30/11/2019",
-          "Fecha Planificada Impresión": "28/11/2019", Estado: "bien", Acciones: "no"
-        },
-        {
-          "Número Solicitud": 24, Procedimiento: "Quimio", Especialidad: "dfa", Centro: "fds", Nusha: "fdaf",
-          nombre: "paciente", apellidos: "pacientoso", "Fecha Solicitud": "22/11/2019",
-          "Fecha Entrega Ideal": "28/11/2019", "Fecha Intervención": "30/11/2019",
-          "Fecha Planificada Impresión": "28/11/2019", Estado: "bien", Acciones: "no"
-        },
-      ]
+      datatabla: []
     };
   }
 
+  componentDidMount() {
+    fetch('/peticiones')
+      .then(peticiones => peticiones.json())
+      .then(datatabla => {
+       datatabla=_.filter(datatabla,{'Especialidad':"Traumatología"})
+       this.setState({ datatabla })
+      });
+  }
 
   render() {
     return (

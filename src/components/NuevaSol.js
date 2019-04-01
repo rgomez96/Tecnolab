@@ -8,11 +8,17 @@ export default class NuevaSol extends Component {
         super(props);
         this.state = { size: 3 }
     }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.onSubmit(this.state);
+    }
+
     render() {
         return (
             <div>
                 <div className="containerSolicitud">
-                    <Form>
+                    <Form onSubmit={this.handleSubmit}>
                         <Form.Group>
                             <Form.Label>Nusha del Paciente</Form.Label>
                             <Form.Control name="nusha" type="text" />
@@ -40,19 +46,19 @@ export default class NuevaSol extends Component {
 
                         <Form.Group>
                             <Form.Label>Fecha de estudio</Form.Label>
-                            <Form.Control name="fechaestudio" type="date" bsPrefix="formizquierda" />
+                            <Form.Control name="fechaestudio" type="date" />
                         </Form.Group>
 
                         <Form.Group>
                             <Form.Label>Especialidad</Form.Label>
-                            <Form.Control name="especialidad" as="select" bsPrefix="formizquierda" >
+                            <Form.Control name="especialidad" as="select" >
                                 <option>Traumatología</option>
                             </Form.Control>
                         </Form.Group>
 
                         <Form.Group>
                             <Form.Label>Centro</Form.Label>
-                            <Form.Control name="centro" as="select" bsPrefix="formizquierda">
+                            <Form.Control name="centro" as="select">
                                 <option>HUJ (HU de Jaén)</option>
                             </Form.Control>
                         </Form.Group>
@@ -78,21 +84,22 @@ export default class NuevaSol extends Component {
 
                         <Form.Group>
                             <Form.Label>Fecha intervención</Form.Label>
-                            <Form.Control name="fechaintervencion" type="date" bsPrefix="formizquierda"/>
+                            <Form.Control name="fechaintervencion" type="date" />
                         </Form.Group>
 
                         <Form.Group>
                             <Form.Label>Fecha ideal de entrega</Form.Label>
 
-                            <Form.Control name="fechaentrega" type="date" bsPrefix="formizquierda" />
+                            <Form.Control name="fechaentrega" type="date" />
 
                         </Form.Group>
+                        <div className="botones">
+                            <Button variant="primary" type="submit"> Solicitar </Button>
+                            <Button variant="danger" type="submit" > Cancelar </Button>
+                        </div>
                     </Form>
                 </div>
-                <div className="botones">
-                    <Button variant="primary" type="submit" > Solicitar </Button>
-                    <Button variant="danger" type="submit" > Cancelar </Button>
-                </div>
+
             </div>
         )
     }
