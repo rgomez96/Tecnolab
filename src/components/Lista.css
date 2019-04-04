@@ -40,7 +40,7 @@
     font-weight:bold;
 }
 
-p{
+.listado{
     width:60%;
     color:#DC143C;
     margin-top:0.25em !important;
@@ -57,4 +57,28 @@ p{
     border-radius:0.25rem;
     margin-top:2em;
     margin-left:2em;
+}
+
+.jsonRow.jsonOdd {
+    background: #f4f4f4;
+}
+
+
+.btn-success {
+    padding:0 !important;
+    margin:0 !important;
+    font-size: 100% !important;
+    background-image: linear-gradient(#28a745, #288745);
+}
+
+.btn-success:hover{
+    background-image: linear-gradient(#28a745, #285745);
+}
+
+a{
+    color:#fff !important;
+}
+
+a:hover{
+    text-decoration: none !important;
 }

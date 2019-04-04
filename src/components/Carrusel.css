@@ -1,3 +1,7 @@
+.carousel.slide{
+    min-width:30em;
+}
+
 a.carousel-control-prev {
     background:#000;
     height:5em;

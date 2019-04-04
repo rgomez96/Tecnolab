@@ -7,4 +7,5 @@ Form {
 .containerlogin {
     width:30%;
     margin-left:2em;
+    min-width: 20em !important;
 }

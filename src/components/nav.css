@@ -1,6 +1,16 @@
 .nav-link {
     color:white !important;
-    font-size:95% !important
+    font-size:95% !important;
+    border-radius:0.25rem;
+}
+
+.nav-link:hover{
+    background-color: #003bff !important;
+
+}
+
+.navbar {
+    min-width: 100% !important;
 }
 
 .navbar-brand {
@@ -25,16 +35,23 @@
 }
 
 .bg-primary {
-    background-image: linear-gradient(#007bff, #004bff);
+    background-image: linear-gradient(#007bff, #002bff);
 }
 
 .btn-primary {
-    background-image: linear-gradient(#007bff, #004bff);
+    background-image: linear-gradient(#007bff, #002bff);
     border:0 !important;
+}
+.btn-primary:hover {
+    background-image: linear-gradient(#007bff, #002bff);
 }
 
 .btn-danger {
     background-image: linear-gradient(#dc3545, #bc3545);
     border:0 !important;
+}
+
+.btn-danger:hover{
+    background-image: linear-gradient(#dc3545, #9c3545);
 }
 

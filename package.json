@@ -44,5 +44,5 @@
     "concurrently": "^4.1.0",
     "react-test-renderer": "^16.8.4"
   },
-  "proxy": "http://localhost:3000"
+  "proxy": "http://localhost:9000"
 }

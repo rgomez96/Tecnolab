@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import './Lista.css'
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom';
 const JsonTable = require('ts-react-json-table');
 
 var _ = require('lodash');
@@ -12,7 +13,8 @@ class ListaPendientes extends Component {
   constructor() {
     super();
     this.state = {
-      datatabla: []
+      datatabla: [],
+      id:"s"
     };
   }
 
@@ -25,11 +27,33 @@ class ListaPendientes extends Component {
       });
   }
 
+
   render() {
+    var a="aja";
+    var columns = [
+      'Número Solicitud',
+      'Procedimiento',
+      'Especialidad',
+      'Centro',
+      'Nusha',
+      'nombre',
+      'apellidos',
+      'Fecha Solicitud',
+      'Fecha Entrega Ideal',
+      'Fecha Intervención',
+      'Fecha Planificada Impresión',
+      'Estado',
+      {key :'Acciones', label: 'Acciones', cell:function(){
+        return (
+          <Button variant="success"><Link to={`/../validquir" + ${this.a}`}>Validar Postquirúrgico</Link></Button>
+        );
+      } }
+    ];
+
     return (
       <div>
-        <p>Listado de solicitudes pendientes de actuación.</p>
-        <JsonTable rows={this.state.datatabla} />
+        <p className="listado">Listado de solicitudes pendientes de actuación.</p>
+        <JsonTable rows={this.state.datatabla} columns={columns}/>
       </div>
     );
   }

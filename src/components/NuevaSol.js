@@ -11,7 +11,13 @@ export default class NuevaSol extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.onSubmit(this.state);
+        fetch(this.props.formAction, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({description: this.state.description})
+        });
     }
 
     render() {
