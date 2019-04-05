@@ -1,19 +1,20 @@
 import React from 'react';
-import Carousel from 'react-bootstrap/Carousel'
-import './Carrusel.css'
-import Img from './Assets/artrosis1.png'
-import Img2 from './Assets/artrosis2.png'
-import Img3 from './Assets/artrosis3.png'
-import Img4 from './Assets/artrosis4.png'
-import Img5 from './Assets/artrosis5.png'
-import Img6 from './Assets/artrosis6.png'
-import Img7 from './Assets/artrosis7.png'
-import Img8 from './Assets/artrosis8.png'
-import Img9 from './Assets/artrosis6.png'
-import Img10 from './Assets/columna_vertebral.png'
-import Img11 from './Assets/columna_lumbar.png'
-import Img12 from './Assets/vertebra_lumbar.png'
-import Img13 from './Assets/torax1.jpg'
+import Carousel from 'react-bootstrap/Carousel';
+import './../App.css';
+
+import Img from './Assets/artrosis1.png';
+import Img2 from './Assets/artrosis2.png';
+import Img3 from './Assets/artrosis3.png';
+import Img4 from './Assets/artrosis4.png';
+import Img5 from './Assets/artrosis5.png';
+import Img6 from './Assets/artrosis6.png';
+import Img7 from './Assets/artrosis7.png';
+import Img8 from './Assets/artrosis8.png';
+import Img9 from './Assets/artrosis6.png';
+import Img10 from './Assets/columna_vertebral.png';
+import Img11 from './Assets/columna_lumbar.png';
+import Img12 from './Assets/vertebra_lumbar.png';
+import Img13 from './Assets/torax1.jpg';
 
 class Ilustraciones extends React.Component {
   render() {

@@ -1,10 +1,9 @@
 import React from 'react';
 import imgtecnolab from './Assets/tecnolab.jpg'
-import './Home.css'
+import './../App.css';
 
 class Home extends React.Component {
   render() {
-
     return (
       <div>
         <img src={imgtecnolab} width="100%"/>

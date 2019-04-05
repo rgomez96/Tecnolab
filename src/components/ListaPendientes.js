@@ -1,20 +1,19 @@
 
 import React, { Component } from 'react';
-import './Lista.css'
+import './../App.css';
 import Button from 'react-bootstrap/Button'
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
+
 const JsonTable = require('ts-react-json-table');
 
 var _ = require('lodash');
 var filter = require('lodash.filter');
 
-
 class ListaPendientes extends Component {
   constructor() {
     super();
     this.state = {
-      datatabla: [],
-      id:"s"
+      datatabla: []
     };
   }
 
@@ -22,14 +21,12 @@ class ListaPendientes extends Component {
     fetch('/peticiones')
       .then(peticiones => peticiones.json())
       .then(datatabla => {
-       datatabla=_.filter(datatabla,{'Especialidad':"Traumatología"})
-       this.setState({ datatabla })
+        //datatabla=_.filter(datatabla,{'Especialidad':"Traumatología"})
+        this.setState({ datatabla })
       });
   }
 
-
   render() {
-    var a="aja";
     var columns = [
       'Número Solicitud',
       'Procedimiento',
@@ -43,17 +40,19 @@ class ListaPendientes extends Component {
       'Fecha Intervención',
       'Fecha Planificada Impresión',
       'Estado',
-      {key :'Acciones', label: 'Acciones', cell:function(){
-        return (
-          <Button variant="success"><Link to={`/../validquir" + ${this.a}`}>Validar Postquirúrgico</Link></Button>
-        );
-      } }
+      {
+        key: 'Acciones', label: 'Acciones', cell: function () {
+          return (
+            <Button variant="success">Validar Postquirúrgico</Button>
+          );
+        }
+      }
     ];
 
     return (
       <div>
         <p className="listado">Listado de solicitudes pendientes de actuación.</p>
-        <JsonTable rows={this.state.datatabla} columns={columns}/>
+        <JsonTable rows={this.state.datatabla} columns={columns} />
       </div>
     );
   }

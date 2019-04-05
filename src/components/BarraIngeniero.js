@@ -1,14 +1,13 @@
 import React from 'react';
-import Navbar from 'react-bootstrap/Navbar'
-import Dropdown from 'react-bootstrap/Dropdown'
-import Nav from 'react-bootstrap/Nav'
-import './nav.css'
+import Navbar from 'react-bootstrap/Navbar';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Nav from 'react-bootstrap/Nav';
+import './../App.css';
 
 
 class BarraIngeniero extends React.Component {
   render() {
     return (
-
       <div>
         <Navbar bg="primary" variant="dark">
           <Navbar.Brand href="/">Tecnolab</Navbar.Brand>

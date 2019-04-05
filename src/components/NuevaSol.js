@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import './NuevaSol.css'
+import './../App.css';
 
 export default class NuevaSol extends Component {
     constructor(props) {
