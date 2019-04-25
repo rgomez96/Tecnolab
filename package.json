@@ -9,6 +9,7 @@
     "bootstrap": "^4.3.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "heroku": "^7.22.10",
     "json-server": "^0.14.2",
     "ldap-server-mock": "^2.0.0",
     "lodash": "^4.17.11",
@@ -23,6 +24,11 @@
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
+    "react-three-fiber": "^2.0.8",
+    "react-three-renderer": "^3.2.4",
+    "stl-viewer": "^0.11.0",
+    "three": "^0.103.0",
+    "three-vignette-background": "^1.0.3",
     "ts-react-json-table": "^0.1.1"
   },
   "scripts": {
