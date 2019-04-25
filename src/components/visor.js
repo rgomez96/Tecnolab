@@ -36,8 +36,8 @@ class Shape extends Component {
     var centro = new THREE.Vector3( 0, 0, 0 );
 
     /* Añade los ejes de coordenadas */
-    var axesHelper = new THREE.AxesHelper( 500 );
-    this.scene.add( axesHelper );
+    //var axesHelper = new THREE.AxesHelper( 500 );
+    //this.scene.add( axesHelper );
 
     /* Cambia el color de fondo */
     this.scene.background = new THREE.Color(0x1d1d1d);
@@ -53,23 +53,10 @@ class Shape extends Component {
     var light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
     this.scene.add(light);
 
-    /* Conjunto de luces direccionales que iluminan la escena
-       NO SE USAN                                           
-
-    var lights = [];
-    lights[0] = new THREE.DirectionalLight( 0xffffff, 0.5 );
-    lights[0].position.set( 5, 0, 0 );
-    lights[1] = new THREE.DirectionalLight( 0xffffff, 0.5 );
-    lights[1].position.set( 0, 5, 0 );
-    lights[2] = new THREE.DirectionalLight( 0xffffff, 0.5 );
-    lights[2].position.set( 0, 0, 5 );
-    this.scene.add( lights[0] );
-    this.scene.add( lights[1] );
-    this.scene.add( lights[2] );                          */
 
     /* Estas dos lineas se utilizaban para generar un cubo de prueba*/
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
+    //const geometry = new THREE.BoxGeometry(1, 1, 1);
+    //const material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
 
     const mtlLoader = new MTLLoader();
     let onProgress = function(e) {
@@ -79,41 +66,7 @@ class Shape extends Component {
       console.log("error:" + e);
     };
 
-    /* Lee el material y lo aplica al archivo OBJ que lee posteriormente */
-
-    /*mtlLoader.load(legomtl, materials => {
-        materials.preload();
-        // OBJ Loader
-        const objLoader = new THREE.OBJLoader();
-        this.materials = materials;
-        objLoader.setMaterials(materials);
-        objLoader.load(lego, object => {
-              this.object = object;
-            this.scene.add(object);
-        }, onProgress, onError);
-    }, onProgress,onError);*/
-
-    /* Lee el fichero y material y los inserta en la escena */
-
-
-    /*mtlLoader.load(legomtl, materials => {
-      materials.preload();
-      const objLoader = new THREE.OBJLoader();
-      this.materials = materials;
-      objLoader.setMaterials(materials);
-      objLoader.load(pelvis, object => {
-        this.object = object;
-        // Creo una bounding box y obtengo las coordenadas de su centro para mover el objeto al origen
-        var bbox = new THREE.Box3().setFromObject( object );
-        centro= bbox.getCenter();
-        console.log(centro);
-
-        //console.log(bbox.getCenter() );
-        object.position.set(-bbox.getCenter().x,-bbox.getCenter().y,-bbox.getCenter().z);
-        this.scene.add(object);
-        this.scene.add(bbox);
-      }, onProgress, onError);
-  }, onProgress,onError);*/
+    /* Lee el material y lo aplica los dos archivos OBJ que lee posteriormente */
 
     mtlLoader.load(legomtl, materials => {
         materials.preload();
@@ -151,7 +104,6 @@ class Shape extends Component {
     /*
     * Este método sólamente lee el archivo OBJ */
 
-
     /*var loader = new THREE.OBJLoader();
     loader.load(
       pelvis,
@@ -169,8 +121,8 @@ class Shape extends Component {
 
 
      //Crea un cubo en el origen
-    var cube = new THREE.Mesh(geometry, material);
-    this.scene.add(cube);
+    //var cube = new THREE.Mesh(geometry, material);
+    //this.scene.add(cube);
     
 
     this.animate();

@@ -5,4 +5,9 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import { BrowserRouter, HashRouter } from "react-router-dom";
 
-ReactDOM.render(      <HashRouter><App /></HashRouter>, document.getElementById("root"));
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
+);
