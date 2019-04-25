@@ -24,23 +24,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(passport.initialize());
 
-/*app.post('/login', function(req, res, next) {
-  passport.authenticate('ldapauth', {session: false}, function(err, user, info) {
-    console.log(err,user);
-    if (err) {
-      return next(err); // will generate a 500 error
-    }
-    // Generate a JSON response reflecting authentication status
-    if (! user) {
-      return res.send({ success : false, message : 'authentication failed' });
-    }
-    return res.send({ success : true, message : 'authentication succeeded' });
-  })(req, res, next);
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});         
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+/*app.post('/login', passport.authenticate('ldapauth', {session: false}), function(req, res) {
+  res.send({status: 'ok'});
 });*/
 
-app.post('/login', passport.authenticate('ldapauth', {session: false}), function(req, res) {
-  res.send({status: 'ok'});
-});
+app.post('/login', passport.authenticate('ldapauth', {successRedirect:'/ilustraciones', failureRedirect: '/login' }));
 
 app.listen(9000);
 console.log ("App listening");
