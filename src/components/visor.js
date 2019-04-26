@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./../App.css";
-import lego from "./Assets/lego.obj";
-import legomtl from "./Assets/lego.mtl";
+import mtl from "./Assets/material.mtl";
 import pelvis from "./Assets/pelvis.obj";
 import protesis from "./Assets/protesis.obj";
 
@@ -33,8 +32,6 @@ class Shape extends Component {
     this.initializeOrbits();
     this.initializeCamera();
 
-    var centro = new THREE.Vector3( 0, 0, 0 );
-
     /* Añade los ejes de coordenadas */
     //var axesHelper = new THREE.AxesHelper( 500 );
     //this.scene.add( axesHelper );
@@ -59,16 +56,10 @@ class Shape extends Component {
     //const material = new THREE.MeshBasicMaterial({ color: 0xff00ff });
 
     const mtlLoader = new MTLLoader();
-    let onProgress = function(e) {
-      console.log("rendering:" + e);
-    };
-    let onError = function(e) {
-      console.log("error:" + e);
-    };
 
     /* Lee el material y lo aplica los dos archivos OBJ que lee posteriormente */
 
-    mtlLoader.load(legomtl, materials => {
+    mtlLoader.load(mtl, materials => {
         materials.preload();
         const objLoader = new THREE.OBJLoader();
         this.materials = materials;
@@ -77,25 +68,17 @@ class Shape extends Component {
           this.object = object;
           // Creo una bounding box y obtengo las coordenadas de su centro para mover el objeto al origen
           var bbox = new THREE.Box3().setFromObject( object );
-          centro= bbox.getCenter();
-          console.log(centro);
   
-          //console.log(bbox.getCenter() );
           object.position.set(-bbox.getCenter().x,-bbox.getCenter().y,-bbox.getCenter().z);
           this.scene.add(object);
-          this.scene.add(bbox);
           objLoader.load(protesis, object => {
             this.object = object;
-            var bboxprot = new THREE.Box3().setFromObject( object );
-            //console.log(bbox.getCenter() );
+            //desplazo el segundo objeto las mismas coordenadas que el principal para mantener la posicion relativa
             object.position.set(-bbox.getCenter().x,-bbox.getCenter().y,-bbox.getCenter().z);
             this.scene.add(object);
-            this.scene.add(bboxprot);
-          }, onProgress, onError);
-        }, onProgress, onError);
-
-
-    }, onProgress,onError);
+          });
+        });
+    });
 
 
 

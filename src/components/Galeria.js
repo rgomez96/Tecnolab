@@ -15,16 +15,16 @@ class Galeria extends React.Component {
         interval={null}
       >
         <Carousel.Item>
-          <img className="image" src={Galeria1} />
+          <img className="image" src={Galeria1} alt="imagen 1 de la galería" />
         </Carousel.Item>
         <Carousel.Item>
-          <img className="image" src={Galeria2} />
+          <img className="image" src={Galeria2} alt="imagen 1 de la galería" />
         </Carousel.Item>
         <Carousel.Item>
-          <img className="image" src={Galeria3} />
+          <img className="image" src={Galeria3} alt="imagen 1 de la galería" />
         </Carousel.Item>
         <Carousel.Item>
-          <img className="image" src={Galeria4} />
+          <img className="image" src={Galeria4} alt="imagen 1 de la galería" />
         </Carousel.Item>
 
       </Carousel>
