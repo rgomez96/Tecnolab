@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(passport.initialize());
 
 passport.serializeUser(function(user, done) {
-  done(null, user);
+  done(null, user.username);
 });         
 passport.deserializeUser(function(user, done) {
   done(null, user);
