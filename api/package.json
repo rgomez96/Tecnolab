@@ -8,6 +8,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "~4.16.0",
+    "express-session": "^1.16.1",
     "passport": "^0.4.0",
     "passport-ldapauth": "^2.1.2"
   },

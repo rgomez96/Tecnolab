@@ -1,43 +1,94 @@
-var express      = require('express'),
-    passport     = require('passport'),
-    bodyParser   = require('body-parser'),
-    LdapStrategy = require('passport-ldapauth');
-    testAPIRouter = require("./routes/testAPI");
-    pendiente = require("./routes/pendiente");
-    app = express();
+var express = require("express"),
+  passport = require("passport"),
+  bodyParser = require("body-parser"),
+  LdapStrategy = require("passport-ldapauth");
+session = require("express-session");
+testAPIRouter = require("./routes/testAPI");
+pendiente = require("./routes/pendiente");
+app = express();
 
+app.use("/testAPI", testAPIRouter); // testAPI sólo sirve para testear que express está funcionando.
+//app.use("/peticiones",pendiente);
+
+/* Atributos necesarios para la identificación con el server LDAP */
 var OPTS = {
   server: {
-    url: 'ldap://localhost:389',
-    bindDN:'cn=Admin',
-    bindCredentials:'Password',
-    searchBase: 'dc=example,dc=com',
-    searchFilter:'(cn={{username}})'
+    url: "ldap://localhost:389",
+    bindDN: "cn=Admin",
+    bindCredentials: "Password",
+    searchBase: "dc=example,dc=com",
+    searchFilter: "(cn={{username}})"
   }
 };
 
-app.use("/testAPI", testAPIRouter);
-app.use("/peticiones",pendiente);
+var loggedIn = false;
+var usuario, nombre, apellidos,telefono,correo,fax;
 
+app.use(
+  session({
+    secret: "ldap secret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { httpOnly: true, maxAge: 2419200000 } /// maxAge in milliseconds
+  })
+);
+
+/* Necesarios para que passport funcione correctamente. La conexión LDAP necesita el bodyparser */
 passport.use(new LdapStrategy(OPTS));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 
+/* Serialize y deserialize user son necesarios para realizar el login */
 passport.serializeUser(function(user, done) {
-  done(null, user.username);
-});         
+  done(null, user.cn);
+});
 passport.deserializeUser(function(user, done) {
-  done(null, user);
+  done(null, user.cn);
 });
 
-/*app.post('/login', passport.authenticate('ldapauth', {session: false}), function(req, res) {
-  res.send({status: 'ok'});
-});*/
+app.post("/login", function(req, res, next) {
+  passport.authenticate("ldapauth", { session: true }, function(err, user) {
+    if (loggedIn == true) {
+      return res.send({ message: "Ya hay un usuario conectado" });
+    }
+    if (err) {
+      return next(err); //Genera un error 500
+    }
+    if (!user) {
+      //return res.send({success:false, message: 'authentication failed'})
+      res.redirect("/login");
+    }
+    loggedIn = true;
+    usuario = user.cn;
+    nombre = user.givenName;
+    apellidos= user.sn;
+    telefono= user.telephoneNumber,
+    correo= user.mail;
+    fax=user.facsimileTelephoneNumber;
+    console.log("user: " + usuario);
+    console.log("correo: " + user.mail);
+    console.log("estado de loggedIn: " + loggedIn);
+    res.redirect("/datosusuario");
+    //return res.send({success:true, message:'authentication succeded'})
+  })(req, res, next);
+});
 
-app.post('/login', passport.authenticate('ldapauth', {successRedirect:'/ilustraciones', failureRedirect: '/login' }));
+app.get('/datosusuario', function (req, res, next) {
+    // res.send('respond with a resource');
+    res.json([
+        {
+            usuario:usuario, nombre:nombre, apellidos:apellidos, telefono:telefono,
+            correo:correo,fax:fax
+        }
+    ]);
+});
 
-app.listen(9000);
-console.log ("App listening");
+//app.post('/login', passport.authenticate('ldapauth', {successRedirect:'/ilustraciones',failureRedirect: '/login'}));
+
+app.set("port", 9000);
+
+app.listen(app.get("port"));
+console.log("App listening on port " + app.get("port"));
 
 module.exports = app;
