@@ -9,7 +9,8 @@ import Ilustraciones from "./components/Ilustraciones";
 import Login from "./components/Login";
 import Shape from "./components/visor";
 import STL from "./components/visorstl";
-
+import Profile from './components/profile';
+import Logout from './components/Logout';
 
 
 
@@ -24,6 +25,8 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/visor" component={Shape} />
           <Route path="/visorstl" component={STL} />
+          <Route path="/logout" component={Logout} />
+          <Route path="/profile" component={Profile} />
         </div>
     );
   }

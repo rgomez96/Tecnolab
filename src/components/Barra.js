@@ -3,8 +3,6 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import "./../App.css";
 
-const JsonTable = require("ts-react-json-table");
-
 class Barra extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +11,7 @@ class Barra extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     fetch("/datosusuario")
       .then(userdata => userdata.json())
       .then(data => {
@@ -21,6 +19,12 @@ class Barra extends React.Component {
         this.setState({ datos: data });
         console.log(this.state.datos);
       });
+  }
+
+  refresh(){
+    //this.setState({ datos: this.state.datos });
+    //this.forceUpdate();
+    console.log("wot");
   }
 
   render() {
@@ -47,7 +51,7 @@ class Barra extends React.Component {
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link href="/logout">Cerrar sesion</Nav.Link>
+                <Nav.Link href="/logout" onClick={this.refresh()}>Cerrar sesion</Nav.Link>
               </Nav.Item>
             </Nav>
           </Navbar>

@@ -75,6 +75,19 @@ app.post("/login", function(req, res, next) {
   })(req, res, next);
 });
 
+app.get("/logout", function(req, res, next) {
+  console.log("logging out");
+  loggedIn=false;
+  console.log("estado de loggedIn: " + loggedIn);
+  usuario = "";
+  nombre = "";
+  apellidos = "";
+  telefono = "";
+  correo = "";
+  fax = "";
+  res.redirect("/");
+});
+
 app.get("/datosusuario", function(req, res, next) {
   res.json({
     usuario:usuario,
