@@ -25,6 +25,7 @@ code {
   color: white !important;
   font-size: 95% !important;
   border-radius: 0.25rem;
+  text-align:center;
 }
 
 .nav-link:hover {
@@ -32,7 +33,10 @@ code {
 }
 
 .navbar {
-  min-width: 30em !important;
+  min-width: 40em !important;
+  width: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .navbar-brand {
@@ -54,6 +58,15 @@ code {
 
 .dropdown-item:hover {
   background-color: #0062cc !important;
+}
+
+.bienvenido{
+  color: white !important;
+  font-size: 95% !important;
+  border-radius: 0.25rem;
+  align-content:right;
+  text-align:right;
+  padding: 0.5rem 1rem;
 }
 
 .bg-primary {
@@ -83,8 +96,12 @@ form {
 }
 
 .containerlogin {
-  width: 30%;
-  margin-left: 2em;
+  width: 25em;
+  max-width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
   min-width: 20em !important;
 }
 
@@ -211,7 +228,9 @@ a:hover {
 }
 
 .carousel.slide {
-  min-width: 30em;
+  width: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 a.carousel-control-prev {
@@ -265,21 +284,21 @@ a.carousel-control-next {
   min-width: 20em !important;
 }
 
-.casilla {  
-  height:3em;
+.casilla {
+  height: 3em;
   margin-left: auto;
   margin-right: auto;
 }
 
 .tipodato {
   float: left;
-  width:40%;
+  width: 40%;
   font-weight: bold;
-  margin-left:2em;
-  margin-right:auto;
+  margin-left: 2em;
+  margin-right: auto;
 }
 
-.dato{
-  float:right;
-  width:40%;
+.dato {
+  float: right;
+  width: 40%;
 }

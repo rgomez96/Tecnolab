@@ -21,24 +21,6 @@ class Barra extends React.Component {
       });
   }
 
-  refresh(event){
-    //this.setState({ datos: this.state.datos });
-    this.forceUpdate();
-    console.log("wot");
-  }
-
-/*  logout = event => {
-    console.log("logout");
-    fetch("/logout")
-    .then(function(response) {
-      return response;
-    })
-    .then(function(myJson) {
-      console.log("logged out");
-      this.forceUpdate();
-    });
-  }*/
-
   logout = event => {
     console.log("logout");
     fetch("/logout")
@@ -64,9 +46,9 @@ class Barra extends React.Component {
             </Nav>
             <Nav className="justify-content-end">
               <Nav.Item>
-                <Nav.Link href="/login">
-                  Bienvenido {this.state.datos.usuario}
-                </Nav.Link>
+              <div className="bienvenido">
+                Bienvenido {this.state.datos.usuario}
+                </div>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link href="/profile">

@@ -20,6 +20,7 @@ class Shape extends Component {
   }
 
   componentDidMount() {
+
     /* Atributos necesarios para generar la escena*/
     const width = this.mount.clientWidth;
     const height = this.mount.clientHeight;
