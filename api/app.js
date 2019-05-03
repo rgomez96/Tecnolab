@@ -1,16 +1,14 @@
 var express = require("express"),
   passport = require("passport"),
   bodyParser = require("body-parser"),
-  LdapStrategy = require("passport-ldapauth");
-session = require("express-session");
-testAPIRouter = require("./routes/testAPI");
-pendiente = require("./routes/pendiente");
-app = express();
+  LdapStrategy = require("passport-ldapauth"),
+  testAPIRouter = require("./routes/testAPI"),
+  app = express();
 
-app.use("/testAPI", testAPIRouter); // testAPI sólo sirve para testear que express está funcionando.
-//app.use("/peticiones",pendiente);
+/* testAPI sólo sirve para testear que express está funcionando. */
+app.use("/testAPI", testAPIRouter);
 
-/* Atributos necesarios para la identificación con el server LDAP */
+/* Atributos relativos al servidor LDAP, necesarios para realizar la conexión */
 var OPTS = {
   server: {
     url: "ldap://localhost:389",
@@ -21,45 +19,27 @@ var OPTS = {
   }
 };
 
+/* Variables que almacenarán la información del usuario */
 var loggedIn = false;
-var usuario,nombre,apellidos,telefono,correo,fax;
+var usuario, nombre, apellidos, telefono, correo, fax;
 
-app.use(
-  session({
-    secret: "ldap secret",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { httpOnly: true, maxAge: 2419200000 } /// maxAge in milliseconds
-  })
-);
-
-/* Necesarios para que passport funcione correctamente. La conexión LDAP necesita el bodyparser */
+/* Necesarios para que Passport funcione correctamente. La conexión LDAP necesita bodyParser */
 passport.use(new LdapStrategy(OPTS));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 
-/* Serialize y deserialize user son necesarios para realizar el login */
-passport.serializeUser(function(user, done) {
-  done(null, user.cn);
-});
-passport.deserializeUser(function(user, done) {
-  done(null, user.cn);
-});
-
+/* Comprueba que no haya un usuario ya conectado. Si no hay un usuario conectado y el usuario introducido
+   existe, entonces copia en las variables los datos que recibe del usuario para enviarlos mas tarde.
+   Si no encuentra el usuario recarga la página. */
 app.post("/login", function(req, res, next) {
-  passport.authenticate("ldapauth", { session: true }, function(err, user) {
-    if (loggedIn == true) {
-      return res.send({ message: "Ya hay un usuario conectado" });
-    }
+  passport.authenticate("ldapauth", function(err, user) {
     if (err) {
       return next(err); //Genera un error 500
     }
     if (!user) {
-      //si no encuentra el usuario recarga la pagina
-      return res.redirect("/login")
+      return res.redirect("/login");
     }
-    //Copia en variables los datos que recibe del usuario para enviarlas más tarde.
     loggedIn = true;
     usuario = user.cn;
     nombre = user.givenName;
@@ -71,11 +51,9 @@ app.post("/login", function(req, res, next) {
   })(req, res, next);
 });
 
-
-
 /* Elimina los datos del usuario conectado y los devuelve a la barra en formato JSON. */
 app.get("/logout", function(req, res) {
-  loggedIn=false;
+  loggedIn = false;
   usuario = "";
   nombre = "";
   apellidos = "";
@@ -83,26 +61,25 @@ app.get("/logout", function(req, res) {
   correo = "";
   fax = "";
   res.json({
-    usuario:usuario,
-    nombre:nombre,
-    apellidos:apellidos,
-    telefono:telefono,
-    correo:correo,
+    usuario: usuario,
+    nombre: nombre,
+    apellidos: apellidos,
+    telefono: telefono,
+    correo: correo,
     fax: fax,
     loggedIn: loggedIn
   });
 });
 
-
 /* Devuelve los datos almacenarios del usuario que está conectado en formato JSON
    (solicitados por Barra y por Profile). */
 app.get("/datosusuario", function(req, res) {
   res.json({
-    usuario:usuario,
-    nombre:nombre,
-    apellidos:apellidos,
-    telefono:telefono,
-    correo:correo,
+    usuario: usuario,
+    nombre: nombre,
+    apellidos: apellidos,
+    telefono: telefono,
+    correo: correo,
     fax: fax,
     loggedIn: loggedIn
   });
