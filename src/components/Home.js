@@ -6,9 +6,8 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <img src={imgtecnolab} width="100%" alt="Se encuentra usted en un entorno de pruebas"/>
+        <img src={imgtecnolab} width="100%" alt="Logo tecnolab"/>
         <br/><br/>
-        <h1> Se encuentra usted en un entorno de pruebas. </h1>
       </div>
     );
   }

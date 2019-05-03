@@ -56,10 +56,9 @@ app.post("/login", function(req, res, next) {
       return next(err); //Genera un error 500
     }
     if (!user) {
-      //return res.send({success:false, message: 'authentication failed'})
-      res.redirect("/login");
+      //si no encuentra el usuario recarga la pagina
+      return res.redirect("/login")
     }
-
     //Copia en variables los datos que recibe del usuario para enviarlas más tarde.
     loggedIn = true;
     usuario = user.cn;
@@ -68,27 +67,21 @@ app.post("/login", function(req, res, next) {
     telefono = user.telephoneNumber;
     correo = user.mail;
     fax = user.facsimileTelephoneNumber;
-    console.log("user: " + usuario);
-    console.log("estado de loggedIn: " + loggedIn);
     res.redirect("/");
-    //return res.send({success:true, message:'authentication succeded'})
   })(req, res, next);
 });
 
-app.get("/logout", function(req, res, next) {
-  console.log("logging out");
+
+
+/* Elimina los datos del usuario conectado y los devuelve a la barra en formato JSON. */
+app.get("/logout", function(req, res) {
   loggedIn=false;
-  console.log("estado de loggedIn: " + loggedIn);
   usuario = "";
   nombre = "";
   apellidos = "";
   telefono = "";
   correo = "";
   fax = "";
-  res.redirect("/");
-});
-
-app.get("/datosusuario", function(req, res, next) {
   res.json({
     usuario:usuario,
     nombre:nombre,
@@ -99,10 +92,23 @@ app.get("/datosusuario", function(req, res, next) {
     loggedIn: loggedIn
   });
 });
-//app.post('/login', passport.authenticate('ldapauth', {successRedirect:'/ilustraciones',failureRedirect: '/login'}));
+
+
+/* Devuelve los datos almacenarios del usuario que está conectado en formato JSON
+   (solicitados por Barra y por Profile). */
+app.get("/datosusuario", function(req, res) {
+  res.json({
+    usuario:usuario,
+    nombre:nombre,
+    apellidos:apellidos,
+    telefono:telefono,
+    correo:correo,
+    fax: fax,
+    loggedIn: loggedIn
+  });
+});
 
 app.set("port", 9000);
-
 app.listen(app.get("port"));
 console.log("App listening on port " + app.get("port"));
 

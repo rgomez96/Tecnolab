@@ -21,10 +21,33 @@ class Barra extends React.Component {
       });
   }
 
-  refresh(){
+  refresh(event){
     //this.setState({ datos: this.state.datos });
-    //this.forceUpdate();
+    this.forceUpdate();
     console.log("wot");
+  }
+
+/*  logout = event => {
+    console.log("logout");
+    fetch("/logout")
+    .then(function(response) {
+      return response;
+    })
+    .then(function(myJson) {
+      console.log("logged out");
+      this.forceUpdate();
+    });
+  }*/
+
+  logout = event => {
+    console.log("logout");
+    fetch("/logout")
+    .then(userdata => userdata.json())
+    .then(data => {
+      console.log(data);
+      this.setState({ datos: data });
+      console.log(this.state.datos);
+    });
   }
 
   render() {
@@ -51,7 +74,7 @@ class Barra extends React.Component {
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link href="/logout" onClick={this.refresh()}>Cerrar sesion</Nav.Link>
+                <Nav.Link onClick={this.logout.bind(this)}> Cerrar sesion </Nav.Link>
               </Nav.Item>
             </Nav>
           </Navbar>
