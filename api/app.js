@@ -60,7 +60,7 @@ app.get("/logout", function(req, res) {
   telefono = "";
   correo = "";
   fax = "";
-  res.json({
+  /*res.json({
     usuario: usuario,
     nombre: nombre,
     apellidos: apellidos,
@@ -68,7 +68,10 @@ app.get("/logout", function(req, res) {
     correo: correo,
     fax: fax,
     loggedIn: loggedIn
-  });
+  });*/
+  console.log("Redirigiendo");
+  return res.render("/");
+  console.log("Redirigido");
 });
 
 /* Devuelve los datos almacenarios del usuario que está conectado en formato JSON
