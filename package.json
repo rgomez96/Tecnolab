@@ -4,13 +4,11 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
-    "passport-ldapauth": "^2.1.2",
     "react": "^16.8.4",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.4",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
-    "react-three-fiber": "^2.0.8",
     "three": "^0.103.0",
     "three-mtl-loader": "^1.0.2",
     "three-obj-loader": "^1.1.3",

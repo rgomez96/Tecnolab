@@ -62,6 +62,7 @@ class Barra extends React.Component {
             <Nav className="mr-auto">
               <Nav.Link href="/ilustraciones">Ilustraciones</Nav.Link>
               <Nav.Link href="/galeria">Galería</Nav.Link>
+              <Nav.Link href="/DICOM">Visor DICOM</Nav.Link>
             </Nav>
             <Nav className="justify-content-end">
               <Nav.Item>
