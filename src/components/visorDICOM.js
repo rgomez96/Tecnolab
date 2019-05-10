@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import "./../App.css";
 import * as THREE from "three";
 import { stackHelperFactory } from "ami.js";
+import * as dat from "dat.gui";
+
 import archivo from "./Assets/image.dcm";
 import archivodos from "./Assets/bmode.dcm";
 import archivotres from "./Assets/pruebatres.dcm";
+import archivocuatro from "./Assets/adi_brain.nii";
 
 const StackHelper = stackHelperFactory(THREE);
-
 
 var AMI = require("ami.js");
 //const OrbitControls = require("three-orbit-controls")(THREE);
@@ -25,6 +27,9 @@ class Radio extends Component {
     const width = this.mount.clientWidth;
     const height = this.mount.clientHeight;
 
+    console.log(width);
+    console.log(height);
+
     /* Crea la escena */
     this.scene = new THREE.Scene();
 
@@ -34,7 +39,15 @@ class Radio extends Component {
     this.mount.appendChild(this.renderer.domElement);
 
     /* Cámara. Su posición inicial se determina en el método initializeCamera() */
-    this.camera = new THREE.PerspectiveCamera(90, width / height, 0.1, 1000); //Crea la cámara
+    //this.camera = new THREE.PerspectiveCamera(90, width / height, 0.1, 1000); //Crea la cámara
+    this.camera = new THREE.OrthographicCamera(
+      width / -2,
+      width / 2,
+      height / -2,
+      height / 2,
+      0.1,
+      1000
+    );
     //this.camera = new THREE.PerspectiveCamera(width/-2,width/2,height/-2,height/2,0.1,1000)
     this.initializeCamera();
 
@@ -43,44 +56,75 @@ class Radio extends Component {
     //this.initializeOrbits();
 
     /* Añade los ejes de coordenadas */
-    //var coordenadas = new THREE.AxesHelper(500);
-    //this.scene.add(coordenadas);
+    var coordenadas = new THREE.AxesHelper(50000);
+    this.scene.add(coordenadas);
 
     var loader = new AMI.VolumeLoader();
-    loader.load(archivotres).then(() => {
-      const series = loader.data[0].mergeSeries(loader.data);
-      const stack = series[0].stack[0];
-      loader.free();
-      const stackHelper = new StackHelper(stack);
+    loader
+      .load(archivodos)
+      .then(() => {
+        const series = loader.data[0].mergeSeries(loader.data);
+        const stack = series[0].stack[0];
+        loader.free();
+        const stackHelper = new StackHelper(stack);
+        stackHelper.index = 0;
+        stackHelper.bbox.visible = false; // Comentar esta linea (o cambiar a True) para ver la bounding box.
+        stackHelper.bbox.color = 0xff0000;
+        stackHelper.border.color = 0x000000; // Bordes negros para que no se vean.
+        this.scene.add(stackHelper); // Añade el DICOM a la escena.
 
-      stackHelper.bbox.visible=false; // Comentar para ver la bounding box.
-      stackHelper.bbox.color = 0xFF0000;
-      stackHelper.border.visible=false;
-      console.log(stackHelper.stack.worldCenter());
-      this.scene.add(stackHelper);
+        const centerLPS = stackHelper.stack.worldCenter(); // Obtiene el centro de la bounding box.
+        /* devuelve un vector con las dimensiones del mundo (max x, min x, max y, min y, max z, min z).
+         Lo usaré para obtener el nuevo ancho y alto */ 
+        const worldbb = stack.worldBoundingBox(); 
+        /**
+         * Mover el fichero al centro provoca problemas, es mejor mover la cámara para ver el fichero.
+         * Calcula la distancia a la que necesita estar la cámara en el eje Z para que el DICOM
+         * se vea siempre dentro de la pantalla y con un buen tamaño. Tiene en cuenta la posibilidad
+         * de que el archivo sea más alto que ancho y más ancho que alto (y después cambia la posición
+         * de la cámara).
+         * (En ocasiones, dado el plano de perspectiva, un pequeño fragmento de la bounding box
+         * puede estar fuera del campo de visión, pero el DICOM siempre se verá completo.)
+         */
+        const Dimensiones = new THREE.Vector3(
+          worldbb[1] - worldbb[0],
+          worldbb[3] - worldbb[2],
+          worldbb[5] - worldbb[4]
+        );
 
-      const centerLPS = stackHelper.stack.worldCenter();
+        console.log("Ancho del archivo: " + Dimensiones.x);
+        console.log("Alto del archivo: " + Dimensiones.y);
 
-        //console.log(centerLPS.y);
-        //console.log(Math.tan(45*Math.PI/180));
-        //console.log(centerLPS.y/Math.tan(45*Math.PI/180));
-        //console.log(centerLPS.y/Math.tan(45*Math.PI/180));
+        console.log("Left: " + this.camera.left);
+        console.log("Right: " + this.camera.right);
+        console.log("Top: " + this.camera.top);
+        console.log("Bottom: " + this.camera.bottom);
 
-        /*en ocasiones puede parecer que la bounding box está fuera de la cámara, pero esto se debe
-          a que la cámara utiliza plano en perspectiva, la imagen siempre se verá bien. */
-        var posZ=centerLPS.y/Math.tan(45*Math.PI/180)+centerLPS.z+20;
+        this.camera.left=(Dimensiones.x*1.3)/-2;
+        this.camera.right=(Dimensiones.x*1.3)/2;
+        this.camera.top=(Dimensiones.y*1.2)/-2;
+        this.camera.bottom=(Dimensiones.y*1.2)/2;
 
-        console.log(posZ);
-        this.camera.position.x= centerLPS.x;
-        this.camera.position.y= centerLPS.y;
-        this.camera.position.z= posZ;
         this.camera.updateProjectionMatrix();
 
-    })
-    .catch(error => {
-      window.console.log('oops... something went wrong...');
-      window.console.log(error);
-    });
+        console.log("Left: " + this.camera.left);
+        console.log("Right: " + this.camera.right);
+        console.log("Top: " + this.camera.top);
+        console.log("Bottom: " + this.camera.bottom);
+
+        //console.log(stackHelper.dimensionsIJK());
+        //stackHelper.bbox.setSize(width-20,height-20);
+
+        this.camera.position.x = centerLPS.x;
+        this.camera.position.y = centerLPS.y;
+        this.camera.position.z = centerLPS.z + 30;
+
+        this.gui(stackHelper);
+      })
+      .catch(error => {
+        window.console.log("oops... something went wrong...");
+        window.console.log(error);
+      });
 
     /* Pone en marcha la escena*/
     this.animate();
@@ -97,40 +141,36 @@ class Radio extends Component {
   initializeCamera() {
     this.camera.position.x = 0;
     this.camera.position.y = 0;
-    this.camera.position.z = 500;
+    this.camera.position.z = 200;
   }
+
   /*initializeOrbits() {
     this.controls.rotateSpeed = 1.0;
     this.controls.zoomSpeed = 1.2;
     this.controls.panSpeed = 0.8;
   }*/
+
   animate() {
     this.frameId = window.requestAnimationFrame(this.animate);
     this.renderer.render(this.scene, this.camera);
   }
 
+  gui = stackHelper => {
+    const gui = new dat.GUI({ name: "Move" });
+    gui.domElement.id = "gui";
+    //var stack = gui.addFolder('Stack');
+    gui.add(stackHelper, "index", 0, stackHelper.stack.dimensionsIJK.z - 1);
+  };
+
   render() {
     return (
-      /*<div>
-          <div id="viewer">
-          <div id="orientation">
-          <div id="top" class="direction"></div>
-          <div id="bottom" class="direction"></div>
-          <div id="left" class="direction"></div>
-          <div id="right" class="direction"></div>
-          </div>
-          <div id="r3d"></div>
-          </div>
-      </div>*/
-      <div>
-        <div
-          id="boardCanvas"
-          style={{ width: "100%", height: "45em" }}
-          ref={mount => {
-            this.mount = mount;
-          }}
-        />
-      </div>
+      <div
+        id="boardCanvas"
+        style={{ width: "80em", height: "45em" }}
+        ref={mount => {
+          this.mount = mount;
+        }}
+      />
     );
   }
 }

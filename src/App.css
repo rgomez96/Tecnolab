@@ -194,3 +194,42 @@ a.carousel-control-next {
   float: right;
   width: 40%;
 }
+
+.visorDICOM {
+  background-image: linear-gradient(#000, #111);
+  color:#fff;
+}
+
+.controles {
+  margin-bottom:0 !important;
+  color:#fff;
+
+  float:left;
+}
+
+.controlder{
+  width:20%;
+  float:left;
+}
+
+.cameraControls {
+  background-image: linear-gradient(#000, #111);
+  width:30%;
+  float:left;
+  padding:0.5em 0em;
+  font-size:90%;
+}
+
+.stackControls {
+  background-image: linear-gradient(#000, #111);
+  width:30%;
+  float:left; 
+  padding:0.5em 0em;
+  font-size:90%;
+}
+
+.dg {
+  position: relative;
+  top: 50em;
+  right: 2px; 
+}
