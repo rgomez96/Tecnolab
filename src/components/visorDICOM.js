@@ -27,10 +27,6 @@ class Radio extends Component {
     const width = this.mount.clientWidth;
     const height = this.mount.clientHeight;
 
-    console.log(width);
-    console.log(height);
-    console.log(this.props.Files);
-    console.log(this.props.Files.path);
 
     /* Crea la escena */
     this.scene = new THREE.Scene();
@@ -61,9 +57,16 @@ class Radio extends Component {
     //var coordenadas = new THREE.AxesHelper(50000);
     //this.scene.add(coordenadas);
 
+    var path;
+    this.props.archivo.map(file => (
+      path = file.path
+    ))
+ 
+    console.log("path: " + path);
+
     var loader = new AMI.VolumeLoader();
     loader
-      .load(archivocuatro)
+      .load(path)
       .then(() => {
         const series = loader.data[0].mergeSeries(loader.data);
         const stack = series[0].stack[0];
