@@ -9,6 +9,7 @@ import Ilustraciones from "./components/Ilustraciones";
 import Login from "./components/Login";
 import Loginvisor from "./components/Loginvisor";
 import LoginvisorSTL from "./components/LoginvisorSTL"
+import LoginVisorDICOM from "./components/LoginVisorDICOM"
 import Profile from './components/profile';
 import Radio from './components/visorDICOM';
 
@@ -26,7 +27,7 @@ class App extends Component {
           <Route path="/visor" component={Loginvisor} />
           <Route path="/visorstl" component={LoginvisorSTL} />
           <Route path="/profile" component={Profile} />
-          <Route path="/DICOM" component={Radio} />
+          <Route path="/DICOM" component={LoginVisorDICOM} />
         </div>
     );
   }

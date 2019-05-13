@@ -29,6 +29,8 @@ class Radio extends Component {
 
     console.log(width);
     console.log(height);
+    console.log(this.props.Files);
+    console.log(this.props.Files.path);
 
     /* Crea la escena */
     this.scene = new THREE.Scene();
@@ -56,12 +58,12 @@ class Radio extends Component {
     //this.initializeOrbits();
 
     /* Añade los ejes de coordenadas */
-    var coordenadas = new THREE.AxesHelper(50000);
-    this.scene.add(coordenadas);
+    //var coordenadas = new THREE.AxesHelper(50000);
+    //this.scene.add(coordenadas);
 
     var loader = new AMI.VolumeLoader();
     loader
-      .load(archivodos)
+      .load(archivocuatro)
       .then(() => {
         const series = loader.data[0].mergeSeries(loader.data);
         const stack = series[0].stack[0];
@@ -73,19 +75,20 @@ class Radio extends Component {
         stackHelper.border.color = 0x000000; // Bordes negros para que no se vean.
         this.scene.add(stackHelper); // Añade el DICOM a la escena.
 
-        const centerLPS = stackHelper.stack.worldCenter(); // Obtiene el centro de la bounding box.
-        /* devuelve un vector con las dimensiones del mundo (max x, min x, max y, min y, max z, min z).
-         Lo usaré para obtener el nuevo ancho y alto */ 
-        const worldbb = stack.worldBoundingBox(); 
         /**
          * Mover el fichero al centro provoca problemas, es mejor mover la cámara para ver el fichero.
          * Calcula la distancia a la que necesita estar la cámara en el eje Z para que el DICOM
-         * se vea siempre dentro de la pantalla y con un buen tamaño. Tiene en cuenta la posibilidad
-         * de que el archivo sea más alto que ancho y más ancho que alto (y después cambia la posición
-         * de la cámara).
-         * (En ocasiones, dado el plano de perspectiva, un pequeño fragmento de la bounding box
-         * puede estar fuera del campo de visión, pero el DICOM siempre se verá completo.)
+         * se vea siempre dentro de la pantalla y con un buen tamaño.
          */
+
+        /* Obtiene el centro de la bounding box para posicionar la cámara */
+        const centerLPS = stackHelper.stack.worldCenter();
+
+        /* devuelve un vector con las dimensiones del mundo (max x, min x, max y, min y, max z, min z).
+         Lo usaré para obtener el nuevo ancho y alto de la cámara ortográfica. */
+
+        const worldbb = stack.worldBoundingBox();
+
         const Dimensiones = new THREE.Vector3(
           worldbb[1] - worldbb[0],
           worldbb[3] - worldbb[2],
@@ -94,17 +97,16 @@ class Radio extends Component {
 
         console.log("Ancho del archivo: " + Dimensiones.x);
         console.log("Alto del archivo: " + Dimensiones.y);
+        console.log("Largo del archivo: " + Dimensiones.z);
 
-        console.log("Left: " + this.camera.left);
-        console.log("Right: " + this.camera.right);
-        console.log("Top: " + this.camera.top);
-        console.log("Bottom: " + this.camera.bottom);
+        /* Utiliza el ancho y largo del archivo para determinar los parámetros de la cámara. */
 
-        this.camera.left=(Dimensiones.x*1.3)/-2;
-        this.camera.right=(Dimensiones.x*1.3)/2;
-        this.camera.top=(Dimensiones.y*1.2)/-2;
-        this.camera.bottom=(Dimensiones.y*1.2)/2;
+        this.camera.left = (Dimensiones.x * 1.3) / -2;
+        this.camera.right = (Dimensiones.x * 1.3) / 2;
+        this.camera.top = (Dimensiones.y * 1.2) / -2;
+        this.camera.bottom = (Dimensiones.y * 1.2) / 2;
 
+        /* Cuando se actualizan los parámetros de la cámara hay que llamar a esta función. */
         this.camera.updateProjectionMatrix();
 
         console.log("Left: " + this.camera.left);
@@ -117,7 +119,7 @@ class Radio extends Component {
 
         this.camera.position.x = centerLPS.x;
         this.camera.position.y = centerLPS.y;
-        this.camera.position.z = centerLPS.z + 30;
+        this.camera.position.z = Dimensiones.z + 10;
 
         this.gui(stackHelper);
       })
@@ -141,7 +143,7 @@ class Radio extends Component {
   initializeCamera() {
     this.camera.position.x = 0;
     this.camera.position.y = 0;
-    this.camera.position.z = 200;
+    this.camera.position.z = 0;
   }
 
   /*initializeOrbits() {

@@ -15,9 +15,7 @@ class Barra extends React.Component {
     fetch("/datosusuario")
       .then(userdata => userdata.json())
       .then(data => {
-        console.log(data);
         this.setState({ datos: data });
-        console.log(this.state.datos);
       });
   }
 
@@ -41,6 +39,7 @@ class Barra extends React.Component {
               <Nav.Link href="/galeria">Galería</Nav.Link>
               <Nav.Link href="/visor">Visor</Nav.Link>
               <Nav.Link href="/visorstl">Visor stl</Nav.Link>
+              <Nav.Link href="/DICOM">Visor de imágenes médicas</Nav.Link>
             </Nav>
             <Nav className="justify-content-end">
               <Nav.Item>
@@ -62,7 +61,6 @@ class Barra extends React.Component {
             <Nav className="mr-auto">
               <Nav.Link href="/ilustraciones">Ilustraciones</Nav.Link>
               <Nav.Link href="/galeria">Galería</Nav.Link>
-              <Nav.Link href="/DICOM">Visor DICOM</Nav.Link>
             </Nav>
             <Nav className="justify-content-end">
               <Nav.Item>

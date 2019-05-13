@@ -229,7 +229,26 @@ a.carousel-control-next {
 }
 
 .dg {
-  position: relative;
-  top: 50em;
-  right: 2px; 
+  position: absolute;
+  top: 9em;
+  left: 0.5em;
+  width:90% !important; 
+  margin-right:auto;
+  margin-left:auto;
 }
+
+.close-button {
+  margin-left:35%;
+  margin-right:35%;
+}
+
+
+.property-name {
+  width: 10% !important;
+}
+
+.c {
+  width:90% !important;
+}
+
+
