@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./../App.css";
-import prueba from "./Assets/prueba.stl";
 
 var THREE = require("three");
 var STLLoader = require("three-stl-loader")(THREE);
@@ -49,7 +48,7 @@ class STL extends Component {
     //Método para cargar el archivo STL
     var loader = new STLLoader();
 
-    loader.load(prueba, object => {
+    loader.load(this.props.archivo, object => {
       this.object = object;
       var material = new THREE.MeshNormalMaterial();
       var mesh = new THREE.Mesh(object, material);

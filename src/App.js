@@ -11,7 +11,6 @@ import Loginvisor from "./components/Loginvisor";
 import LoginvisorSTL from "./components/LoginvisorSTL"
 import LoginVisorDICOM from "./components/LoginVisorDICOM"
 import Profile from './components/profile';
-import Radio from './components/visorDICOM';
 
 //           <Route path="/logout" component={Logout} />
 

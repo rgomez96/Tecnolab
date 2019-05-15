@@ -21,16 +21,6 @@ class LoginVisorDICOM extends React.Component {
       });
   }
 
-  actualizarState(acceptedFiles) {
-    this.setState({ Files: acceptedFiles });
-    this.setState({ leido: true });
-    console.log(this.state.Files);
-    console.log(this.state.leido);
-    /*this.state.Files.map(file => (
-      console.log(file.path)
-    ))*/
-  }
-
   render() {
     return (
       <div>
@@ -42,6 +32,7 @@ class LoginVisorDICOM extends React.Component {
               </div>
             ) : (
               <div>
+                <br/>
                 <h1>
                   No se puede utilizar el visor hasta que subas un archivo.
                 </h1>
@@ -62,8 +53,7 @@ class LoginVisorDICOM extends React.Component {
                       <div {...getRootProps()}>
                         <input {...getInputProps()} />
                         <p>
-                          Drag 'n' drop some files here, or click to select
-                          files
+                          Arrastra o haz click aquí para seleccionar un archivo (debe ser DICOM).
                         </p>
                       </div>
                     </section>
