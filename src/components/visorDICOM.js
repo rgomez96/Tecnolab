@@ -4,11 +4,6 @@ import * as THREE from "three";
 import { stackHelperFactory } from "ami.js";
 import * as dat from "dat.gui";
 
-import archivo from "./Assets/image.dcm";
-import archivodos from "./Assets/bmode.dcm";
-import archivotres from "./Assets/pruebatres.dcm";
-import archivocuatro from "./Assets/adi_brain.nii";
-
 const StackHelper = stackHelperFactory(THREE);
 
 var AMI = require("ami.js");
@@ -57,16 +52,10 @@ class Radio extends Component {
     //var coordenadas = new THREE.AxesHelper(50000);
     //this.scene.add(coordenadas);
 
-    var path;
-    this.props.archivo.map(file => (
-      path = file.path
-    ))
- 
-    console.log("path: " + path);
 
     var loader = new AMI.VolumeLoader();
     loader
-      .load(path)
+      .load(this.props.archivo)
       .then(() => {
         const series = loader.data[0].mergeSeries(loader.data);
         const stack = series[0].stack[0];

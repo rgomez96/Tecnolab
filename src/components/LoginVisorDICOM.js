@@ -22,8 +22,8 @@ class LoginVisorDICOM extends React.Component {
   }
 
   actualizarState(acceptedFiles) {
-    this.setState({Files:acceptedFiles});
-    this.setState({leido:true});
+    this.setState({ Files: acceptedFiles });
+    this.setState({ leido: true });
     console.log(this.state.Files);
     console.log(this.state.leido);
     /*this.state.Files.map(file => (
@@ -38,14 +38,25 @@ class LoginVisorDICOM extends React.Component {
           <div>
             {this.state.leido ? (
               <div>
-                <Radio archivo={this.state.Files}/>
+                <Radio archivo={this.state.Files} />
               </div>
             ) : (
               <div>
                 <h1>
                   No se puede utilizar el visor hasta que subas un archivo.
                 </h1>
-                <Dropzone multiple={false} onDrop={acceptedFiles => this.actualizarState(acceptedFiles)}>
+                <Dropzone
+                  multiple={false}
+                  onDrop={async ([file]) => {
+                    let reader = new FileReader();
+                    reader.onload = (e) => {
+                      const contents = e.target.result;
+                      this.setState({ Files: contents });
+                      this.setState({ leido: true });
+                    };
+                    reader.readAsDataURL(file);
+                  }}
+                >
                   {({ getRootProps, getInputProps }) => (
                     <section>
                       <div {...getRootProps()}>
