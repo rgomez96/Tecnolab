@@ -9,7 +9,8 @@ class LoginVisorDICOM extends React.Component {
     this.state = {
       datos: [],
       Files: [],
-      leido: false
+      leido: false,
+      error: false
     };
   }
 
@@ -39,13 +40,19 @@ class LoginVisorDICOM extends React.Component {
                 <Dropzone
                   multiple={false}
                   onDrop={async ([file]) => {
-                    let reader = new FileReader();
-                    reader.onload = (e) => {
-                      const contents = e.target.result;
-                      this.setState({ Files: contents });
-                      this.setState({ leido: true });
-                    };
-                    reader.readAsDataURL(file);
+                    let extension=file.name.split('.').pop().toLowerCase();
+                    console.log("formato: " + extension);
+                    if (extension=="dcm") {
+                      let reader = new FileReader();
+                      reader.onload = (e) => {
+                        const contents = e.target.result;
+                        this.setState({ Files: contents });
+                        this.setState({ leido: true });
+                      };
+                      reader.readAsDataURL(file);
+                    } else {
+                      this.setState({error:true});
+                    }
                   }}
                 >
                   {({ getRootProps, getInputProps }) => (
@@ -61,6 +68,13 @@ class LoginVisorDICOM extends React.Component {
                   )}
                 </Dropzone>
               </div>
+            )}
+            {this.state.error ? (
+              <div className="error">
+                 Se ha producido el error, el fichero debe ser formato DICOM.
+              </div>
+            ) : (
+              ''
             )}
           </div>
         ) : (
