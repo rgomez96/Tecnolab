@@ -33,7 +33,7 @@ code {
 }
 
 .navbar {
-  min-width: 40em !important;
+  min-width: 47em !important;
   width: auto;
   max-width: 100%;
   height: auto;
@@ -143,7 +143,7 @@ a.carousel-control-next {
 
 .image {
   width: 90%;
-  height: 45em;
+  height: 90vh;
   margin-left: 5%;
   margin-right: 5%;
 }
@@ -167,6 +167,10 @@ a.carousel-control-next {
 #boardCanvas {
   margin-left: auto;
   margin-right: auto;
+}
+
+canvas {
+  height:90vh !important;
 }
 
 .profile {
@@ -259,7 +263,6 @@ section {
   margin-top:2em;
   padding-top:0.5em;
   padding-bottom:0.5em;
-  height:5em;
   border:3px #000 solid;
   text-align:center;
   background-image: linear-gradient(#f4f4f4, #ffffff);

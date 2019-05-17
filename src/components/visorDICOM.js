@@ -52,7 +52,6 @@ class Radio extends Component {
     //var coordenadas = new THREE.AxesHelper(50000);
     //this.scene.add(coordenadas);
 
-
     var loader = new AMI.VolumeLoader();
     loader
       .load(this.props.archivo)
@@ -87,9 +86,9 @@ class Radio extends Component {
           worldbb[5] - worldbb[4]
         );
 
-        console.log("Ancho del archivo: " + Dimensiones.x);
-        console.log("Alto del archivo: " + Dimensiones.y);
-        console.log("Largo del archivo: " + Dimensiones.z);
+        //console.log("Ancho del archivo: " + Dimensiones.x);
+        //console.log("Alto del archivo: " + Dimensiones.y);
+        //console.log("Largo del archivo: " + Dimensiones.z);
 
         /* Utiliza el ancho y largo del archivo para determinar los parámetros de la cámara. */
 
@@ -101,10 +100,10 @@ class Radio extends Component {
         /* Cuando se actualizan los parámetros de la cámara hay que llamar a esta función. */
         this.camera.updateProjectionMatrix();
 
-        console.log("Left: " + this.camera.left);
-        console.log("Right: " + this.camera.right);
-        console.log("Top: " + this.camera.top);
-        console.log("Bottom: " + this.camera.bottom);
+        //console.log("Left: " + this.camera.left);
+        //console.log("Right: " + this.camera.right);
+        //console.log("Top: " + this.camera.top);
+        //console.log("Bottom: " + this.camera.bottom);
 
         //console.log(stackHelper.dimensionsIJK());
         //stackHelper.bbox.setSize(width-20,height-20);

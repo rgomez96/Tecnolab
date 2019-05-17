@@ -32,7 +32,7 @@ class LoginVisorDICOM extends React.Component {
               </div>
             ) : (
               <div>
-                <br/>
+                <br />
                 <h1>
                   No se puede utilizar el visor hasta que subas un archivo.
                 </h1>
@@ -53,7 +53,8 @@ class LoginVisorDICOM extends React.Component {
                       <div {...getRootProps()}>
                         <input {...getInputProps()} />
                         <p>
-                          Arrastra o haz click aquí para seleccionar un archivo (debe ser DICOM).
+                          Arrastra o haz click aquí para seleccionar un archivo
+                          (debe ser DICOM).
                         </p>
                       </div>
                     </section>

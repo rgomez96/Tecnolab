@@ -18,9 +18,7 @@ class Loginvisor extends React.Component {
         fetch("/datosusuario")
           .then(userdata => userdata.json())
           .then(data => {
-            console.log(data);
             this.setState({ datos: data });
-            console.log(this.state.datos);
           });
       }
 
